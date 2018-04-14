@@ -44,7 +44,7 @@ public class NameGeneratorByPhoneNumber {
 		
 		if (isValidPhoneNumber(number, validate) && validate){
 			// trim the area code
-			return generateName(number.substring(2).toCharArray());
+			return generateName(number.substring(3).toCharArray());
 		} else if (isValidPhoneNumber(number, validate) && !validate){
 			// don't trim because, we know it's not an actual phone number, and just for test
 			return generateName(number.toCharArray());
@@ -90,21 +90,21 @@ public class NameGeneratorByPhoneNumber {
 	public static void test(String number, boolean validate){
 		NameGeneratorByPhoneNumber gn = new NameGeneratorByPhoneNumber();
 		
-		ArrayList<String> available_names = gn.generateName(number, validate);
+		ArrayList<String> available_names_list = gn.generateName(number, validate);
 		
-		System.out.println("Printing available names for: " + number);
 		
-		if (available_names != null && available_names.size() != 0){
-			/*if (BinarySearch4ArrayOfStrings.binarySearch(Arrays.sort(available_names), "mdonald"){
+		System.out.println("\nPrinting available names for: " + number);
+		
+		if (available_names_list != null && available_names_list.size() != 0){
+			String[] available_names = new String[available_names_list.size()];
+			available_names = available_names_list.toArray(available_names);
+			Arrays.sort(available_names);
+			
+			if (BinarySearch4ArrayOfStrings.binarySearch(available_names, "mdonald")){
 				System.out.print("Param pam pam paaaaa!!");
-			} else {*/
-				for (String s : available_names){
-					// need to be modified. I will write a search for this. 
-					if (s == "mdonald"){
-						System.out.println(s);
-					}
-				}
-			//}
+			} else {
+				System.out.println("\tgiven word is not found under possibilities");
+			}
 		} else {
 			System.out.println("\t No Available Names");
 		}	
